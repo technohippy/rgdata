@@ -33,12 +33,12 @@ module RGData
       client
     end
 
-    def self.oauth_login_url
+    def self.oauth_login_uri
       raise StandardError.new('Not implemented yet')
     end
 
-    def oauth_login_url
-      self.class.oauth_login_url
+    def oauth_login_uri
+      self.class.oauth_login_uri
     end
 
     ## extension points for subclasses ##
