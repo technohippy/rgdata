@@ -1,0 +1,24 @@
+#summary authenticate to services
+
+= Client Login for installed application =
+
+{{{
+service = RGData::DocumentsList::Service.new
+client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
+}}}
+
+= Auth Sub =
+== For a Specific Service ==
+{{{
+# use Documents List API
+@service = RGData::DocumentsList::Service.new
+@service.login_uri('http://yourapp.com/next_path')
+}}}
+
+== For More Than One Services ==
+{{{
+# TEMPORARY
+# use Document List API and YouTube API
+@service = RGData::Service.new nil, nil
+@service.login_url('http://yourapp.com/next_path', :scope => ['http://docs.google.com/feeds', 'http://www.blogger.com/feeds'])
+}}}
