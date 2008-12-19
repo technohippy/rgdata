@@ -1,0 +1,2 @@
+#!/bin/sh
+RUBYLIB=lib spec $1 -fs -c
