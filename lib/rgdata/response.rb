@@ -27,8 +27,9 @@ module RGData
       @http_response.body
     end
 
-    def body(type=:obj)
+    def body(type=nil)
       case type
+      when NilClass; body_obj rescue raw_body
       when :raw; raw_body
       when :obj; body_obj
       when :hash; body_hash

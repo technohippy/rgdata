@@ -19,7 +19,7 @@ describe RGData::DocumentsList::Service do
     print "MESSAGE:"
     puts response.message
     print "BODY:"
-    puts response.raw_body
+    puts response.body
 
     response.code.should == 201
   end
