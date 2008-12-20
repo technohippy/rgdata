@@ -15,7 +15,7 @@ module RGData
     end
 
     def login(email, password)
-      client_class.new Token::ClientToken.new(self, email, password)
+      client_class.new self, Token::ClientToken.new(self, email, password)
     end
 
     def self.login_uri(next_uri, scope, opts={})
@@ -29,7 +29,7 @@ module RGData
     end
 
     def accept(token_value, want_upgrade=true)
-      client = client_class.new Token::AuthSubToken.new(self, token_value)
+      client = client_class.new self, Token::AuthSubToken.new(self, token_value)
       client.upgrade! if want_upgrade
       client
     end

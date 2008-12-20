@@ -3,9 +3,10 @@ require 'rgdata/util/hash_with_accessor'
 
 module RGData
   class Client
-    attr_accessor :token
+    attr_accessor :token, :service
 
-    def initialize(token)
+    def initialize(service, token)
+      @service = service
       @token = token
     end
 
@@ -13,8 +14,22 @@ module RGData
       token.upgrade!
     end
 
+    def get_request(path, header={})
+      Net::HTTP.start(service.uri, 80) do |http|
+        http.get(path, token.header.update(header))
+      end
+    end
+
     def list_xml(etag=nil)
-      token.list_xml(etag)
+      token.login? or raise NeedLoggedInError
+      header = etag ? {'If-None-Match' => etag} : {}
+      result = get_request(service.list_path, header)
+      check_result(result)
+      result.body
+    end
+
+    def check_result(result)
+      # TODO check and raise an error if something is wrong
     end
 
     def list_hash(etag=nil)

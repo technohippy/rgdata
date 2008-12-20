@@ -27,7 +27,7 @@ describe RGData::DocumentsList::Service do
     list['entry'][0]['title'][0]['type'].should == 'text'
   end
 
-  it 'should get a list of documents by pseudo xpath' do
+  it 'should get a list of documents by pseudo xpath access' do
     client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
     list = client.list
 
