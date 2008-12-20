@@ -6,18 +6,18 @@
   * Create my own xml library
 
 == API and Feature ==
-  * Google Apps APIs
-  * Google Base Data API
-  * Blogger Data API
-  * Google Book Search Data API
-  * Google Calendar Data API
-  * Google Code Search Data API
-  * Google Contacts Data API
-  * Google Documents List Data API
+  * [ ] Google Apps APIs
+  * [ ] Google Base Data API
+  * [ ] Blogger Data API
+  * [ ] Google Book Search Data API
+  * [ ] Google Calendar Data API
+  * [ ] Google Code Search Data API
+  * [ ] Google Contacts Data API
+  * [-] Google Documents List Data API
     * [v] Retrieving a list of documents
     * [v] Retrieving a list or document again
-    * [ ] Uploading documents
-      * [ ] Uploading content with metadata
+    * [-] Uploading documents
+      * [-] Uploading content with metadata
       * [v] Uploading content without metadata
       * [v] Uploading only metadata (no content)
     * [ ] Updating documents
@@ -40,12 +40,12 @@
       * [ ] Overview of Document Sharing (ACLs)
       * [ ] Retrieving the ACL feed for a Document
       * [ ] Modifying the ACL feed for a Document
-  * Google Finance Portfolio Data API
-  * Google Health Data API
-  * Google Notebook Data API
-  * Picasa Web Albums Data API
-  * Google Spreadsheets Data API
-  * Webmaster Tools Data API
-  * YouTube Data API
+  * [ ] Google Finance Portfolio Data API
+  * [ ] Google Health Data API
+  * [ ] Google Notebook Data API
+  * [ ] Picasa Web Albums Data API
+  * [ ] Google Spreadsheets Data API
+  * [ ] Webmaster Tools Data API
+  * [ ] YouTube Data API
 
 = DONE =
