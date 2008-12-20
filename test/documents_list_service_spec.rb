@@ -7,12 +7,32 @@ describe RGData::DocumentsList::Service do
     @client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
   end
 
-  it 'should upload csv file with metadata' do
-    title = "RGData Test (#{Time.now})"
-    filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv"
-    need_metadata = true
+  it 'should update metadata' do
+    entry = @client.list.entry.first
+    response = @client.update(entry, :title => 'updated')
 
-    response = @client.upload title, filepath, need_metadata
+    print "CODE:"
+    puts response.code
+    print "MESSAGE:"
+    puts response.message
+    print "BODY:"
+    puts response.raw_body.gsub('&quot;', '"')
+
+    response.code.should == 201
+
+    #entry = @client.list.entry[1]
+    #entry.update(:title => 'updated2')
+
+    #entry = @client.list.entry[1]
+    #entry.title = 'updated title'
+    #entry.content = 'updated content'
+    #entry.update!
+  end
+
+=begin
+  it 'should update content' do
+    entry = @client.list.entry.first
+    response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'csv')
 
     print "CODE:"
     puts response.code
@@ -23,13 +43,31 @@ describe RGData::DocumentsList::Service do
 
     response.code.should == 201
   end
+=end
+
+  it 'should upload csv file with metadata' do
+    title = "RGData Test (#{Time.now})"
+    filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv"
+    need_metadata = true
+
+    response = @client.upload title, :filepath => filepath, :metadata => need_metadata
+
+    print "CODE:"
+    puts response.code
+    print "MESSAGE:"
+    puts response.message
+    print "BODY:"
+    puts response.raw_body
+
+    response.code.should == 201 # fail!
+  end
 
   it 'should upload csv file without metadata' do
     title = "RGData Test (#{Time.now})"
     filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv"
     need_metadata = false
 
-    response = @client.upload title, filepath, need_metadata
+    response = @client.upload title, :filepath => filepath, :metadata => need_metadata
     response.code.should == 201
     response.body.author.name.should == 'RGData.Library'
   end

@@ -1,11 +1,10 @@
 = TODO =
-  * Add response class to handle response
+  * Create specific objects for entry and entry list
   * Error handling
   * Develop a client app for instance
-  * Spcify api version
   * Create my own xml library
 
-== API and Feature ==
+== APIs and Features ==
   * ( ) Google Apps APIs
   * ( ) Google Base Data API
   * ( ) Blogger Data API
@@ -49,3 +48,6 @@
   * ( ) YouTube Data API
 
 = DONE =
+  * 2008/12/20
+    * Add response class to handle response
+    * Spcify api version (ver.2)
