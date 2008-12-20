@@ -21,7 +21,7 @@ describe RGData::DocumentsList::Service do
     print "BODY:"
     puts response.body
 
-    response.code.should == '201'
+    response.code.should == 201
   end
 
   it 'should get a list of documents by method access' do
