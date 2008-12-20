@@ -23,10 +23,10 @@ I'm manually copying this page from TODO.txt, so that this list might be a bit o
       * (-) Uploading content with metadata
       * (v) Uploading content without metadata
       * (v) Uploading only metadata (no content)
-    * ( ) Updating documents
-      * ( ) Updating metadata
-      * ( ) Updating content
-      * ( ) Updating both metadata and content
+    * (v) Updating documents
+      * (v) Updating metadata
+      * (v) Updating content
+      * (v) Updating both metadata and content
     * ( ) Creating a folder
     * ( ) Trashing a document or folder
     * ( ) Searching the documents feed
