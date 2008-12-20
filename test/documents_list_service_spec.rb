@@ -31,6 +31,8 @@ describe RGData::DocumentsList::Service do
 
     response = @client.upload title, filepath, need_metadata
     response.code.should == 201
+    response.body.title.type.should == 'text'
+    response.body.title.content.should =~ /RGData Test/
   end
 
   it 'should upload only metadata' do
