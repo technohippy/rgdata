@@ -1,5 +1,3 @@
-require 'base64'
-require 'xmlsimple'
 require 'rgdata/response'
 require 'rgdata/util/hash_with_accessor'
 
@@ -24,10 +22,11 @@ module RGData
     end
 
     def post_request(path, data, header={})
-      Net::HTTP.start(service.uri, 80) do |http|
+      http_response = Net::HTTP.start(service.uri, 80) do |http|
 puts token.header.merge(header).inspect
         http.post(path, data, token.header.merge(header))
       end
+      Response.new(http_response)
     end
 
     def list(etag=nil)

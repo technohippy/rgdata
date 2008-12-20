@@ -1,3 +1,4 @@
+require 'base64'
 require 'pathname'
 require 'rgdata/client'
 
