@@ -19,11 +19,24 @@ module RGData
         '/feeds/documents/private/full'
       end
 
+      def new_path
+        list_path
+      end
+
+      def edit_path(category, eid)
+        "/feeds/documents/private/full/#{category}%3A#{eid}"
+      end
+
+      def edit_media_path(category, eid)
+        "/feeds/media/private/full/#{category}%3A#{eid}"
+      end
+
       # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#UploadingWMetadata
-      def metadata(title)
+      # http://code.google.com/intl/ja/apis/documents/docs/2.0/developers_guide_protocol.html#UpdatingMetadata
+      def metadata(title, etag=nil)
         %Q{
 <?xml version='1.0' encoding='UTF-8'?>
-<atom:entry xmlns:atom="http://www.w3.org/2005/Atom">
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"#{etag ? %Q( gd:etag=#{etag}) : ''}>
   <atom:category scheme="http://schemas.google.com/g/2005#kind"
       term="http://schemas.google.com/docs/2007#document" />
   <atom:title>#{title}</atom:title>
