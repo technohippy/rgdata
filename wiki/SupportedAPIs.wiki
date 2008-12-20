@@ -8,7 +8,7 @@ I'm manually copying this page from TODO.txt, so that this list might be a bit o
   * (-) Partly supported
   * (v) Supported
 
-== API and Feature ==
+== APIs and Features ==
   * ( ) Google Apps APIs
   * ( ) Google Base Data API
   * ( ) Blogger Data API
