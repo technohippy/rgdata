@@ -18,7 +18,8 @@
     * [v] Retrieving a list or document again
     * [ ] Uploading documents
       * [ ] Uploading content with metadata
-      * [ ] Uploading content without metadata
+      * [v] Uploading content without metadata
+      * [v] Uploading only metadata (no content)
     * [ ] Updating documents
       * [ ] Updating metadata
       * [ ] Updating content
