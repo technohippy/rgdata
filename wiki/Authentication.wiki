@@ -1,9 +1,16 @@
 #summary authenticate to services
+#labels Phase-Implementation
 
 = Client Login for installed application =
-
+== For a Specific Service ==
 {{{
 service = RGData::DocumentsList::Service.new
+client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
+}}}
+
+== For More Than One Services ==
+{{{
+@service = RGData::Service.new
 client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 }}}
 
