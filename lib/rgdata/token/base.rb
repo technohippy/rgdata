@@ -15,15 +15,16 @@ module RGData
         raise NeedLoggedInError unless token_value
       end
 
-      def get_request(path)
+      def get_request(path, etag=nil)
         Net::HTTP.start(service.uri, 80) do |http|
-          http.get(path, header)
+          etag_header = etag ? {'If-None-Match' => etag} : {}
+          http.get(path, header.update(etag_header))
         end
       end
 
-      def list_xml
+      def list_xml(etag=nil)
         login_or_raise
-        result = get_request(service.list_path)
+        result = get_request(service.list_path, etag)
         check_result(result)
         result.body
       end

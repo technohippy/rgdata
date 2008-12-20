@@ -8,6 +8,7 @@ module RGData
   class NeedLoggedInError < StandardError; end
   class InvalidTokenError < StandardError; end
   class AlreadyUpgradedError < StandardError; end
+  class NotInitializedError < StandardError; end
 
   # http://code.google.com/support/bin/answer.py?answer=62712&topic=10711
   module ServiceNames

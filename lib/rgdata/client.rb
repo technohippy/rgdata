@@ -13,23 +13,23 @@ module RGData
       token.upgrade!
     end
 
-    def list_xml
-      token.list_xml
+    def list_xml(etag=nil)
+      token.list_xml(etag)
     end
 
-    def list_hash
-      xml2hash list_xml
+    def list_hash(etag=nil)
+      xml2hash list_xml(etag)
     end
 
-    def list_obj
-      xml2obj list_xml
+    def list_obj(etag=nil)
+      xml2obj list_xml(etag)
     end
 
-    def list(format='obj')
+    def list(etag=nil, format='obj')
       case format.to_s.downcase
-      when 'hash';          list_hash
-      when 'xml', 'string'; list_xml
-      else;                 list_obj
+      when 'hash';          list_hash(etag)
+      when 'xml', 'string'; list_xml(etag)
+      else;                 list_obj(etag)
       end
     end
 
