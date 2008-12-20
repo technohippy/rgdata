@@ -6,7 +6,7 @@ module RGData
   class Service
     attr_accessor :name, :uri, :company_name, :application_name, :version_id, :token
 
-    def initialize(service_name, service_uri)
+    def initialize(service_name='xapi', service_uri=nil)
       @name = service_name
       @uri = service_uri
       @company_name = 'N/A'
@@ -23,7 +23,8 @@ module RGData
     end
 
     def login_uri(next_uri, opts={})
-      options = {:scope => scope, :secure => false, :session => true}.update opts
+      options = {:secure => false, :session => true}.update opts
+      options[:scope] ||= scope
       self.class.login_uri(next_uri, options[:scope], options)
     end
 
@@ -34,7 +35,7 @@ module RGData
     end
 
     def self.oauth_login_uri
-      raise StandardError.new('Not implemented yet')
+      raise NotImplementedError
     end
 
     def oauth_login_uri
@@ -44,6 +45,7 @@ module RGData
     ## extension points for subclasses ##
 
     def scope
+      raise NotInitializedError.new('@uri') unless uri
       "http://#{uri}/feeds"
     end
 

@@ -1,4 +1,5 @@
 require 'uri'
+require 'rgdata'
 require 'rgdata/token/base'
 
 module RGData
