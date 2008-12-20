@@ -3,7 +3,9 @@ require 'rgdata/util/array_with_delegation_to_first'
 module RGData
   module Util
     class HashWithAccessor < Hash
-      instance_methods.each do |name|
+      #important_methods = ['class', 'to_s', 'inspect']
+      #(instance_methods - important_methods).each do |name|
+      (instance_methods(false) + ['type']).each do |name|
         if name =~ /^[a-z]\w*[!?]?$/
           alias :"__hash__#{name}" :"#{name}"
           undef :"#{name}"
@@ -16,7 +18,6 @@ module RGData
           when Hash
             self.from_hash v
           when Array
-            #v.map{|e| convert.call e}
             ArrayWithDelegationToFirst.from_array(v.map{|e| convert.call e})
           else
             v
