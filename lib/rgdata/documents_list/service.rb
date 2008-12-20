@@ -28,7 +28,7 @@ module RGData
       term="http://schemas.google.com/docs/2007#document" />
   <atom:title>#{title}</atom:title>
 </atom:entry>        
-        }
+        }.strip
       end
     end
   end
