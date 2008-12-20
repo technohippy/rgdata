@@ -4,49 +4,49 @@
 I'm manually copying this page from TODO.txt, so that this list might be a bit old. Up-to-date list is available [http://code.google.com/p/rgdata/source/browse/trunk/TODO.txt here].
 
 === Note ===
-  * [ ] Not supported yet
-  * [-] Partly supported
-  * [v] Supported
+  * ( ) Not supported yet
+  * (-) Partly supported
+  * (v) Supported
 
 == API and Feature ==
-  * [ ] Google Apps APIs
-  * [ ] Google Base Data API
-  * [ ] Blogger Data API
-  * [ ] Google Book Search Data API
-  * [ ] Google Calendar Data API
-  * [ ] Google Code Search Data API
-  * [ ] Google Contacts Data API
-  * [-] Google Documents List Data API
-    * [v] Retrieving a list of documents
-    * [v] Retrieving a list or document again
-    * [-] Uploading documents
-      * [-] Uploading content with metadata
-      * [v] Uploading content without metadata
-      * [v] Uploading only metadata (no content)
-    * [ ] Updating documents
-      * [ ] Updating metadata
-      * [ ] Updating content
-      * [ ] Updating both metadata and content
-    * [ ] Creating a folder
-    * [ ] Trashing a document or folder
-    * [ ] Searching the documents feed
-      * [ ] Retrieving all word processor documents
-      * [ ] Retrieving all starred presentations
-      * [ ] Retrieving all documents in a named folder
-      * [ ] Performing a text query
-      * [ ] Retrieving all documents and folders
-    * [ ] Retrieving a list of folder contents
-    * [ ] Moving documents and folders
-      * [ ] Moving into a folder
-      * [ ] Moving out of a folder
-    * [ ] Modifying Document Sharing Permissions
-      * [ ] Overview of Document Sharing (ACLs)
-      * [ ] Retrieving the ACL feed for a Document
-      * [ ] Modifying the ACL feed for a Document
-  * [ ] Google Finance Portfolio Data API
-  * [ ] Google Health Data API
-  * [ ] Google Notebook Data API
-  * [ ] Picasa Web Albums Data API
-  * [ ] Google Spreadsheets Data API
-  * [ ] Webmaster Tools Data API
-  * [ ] YouTube Data API
+  * ( ) Google Apps APIs
+  * ( ) Google Base Data API
+  * ( ) Blogger Data API
+  * ( ) Google Book Search Data API
+  * ( ) Google Calendar Data API
+  * ( ) Google Code Search Data API
+  * ( ) Google Contacts Data API
+  * (-) Google Documents List Data API
+    * (v) Retrieving a list of documents
+    * (v) Retrieving a list or document again
+    * (-) Uploading documents
+      * (-) Uploading content with metadata
+      * (v) Uploading content without metadata
+      * (v) Uploading only metadata (no content)
+    * ( ) Updating documents
+      * ( ) Updating metadata
+      * ( ) Updating content
+      * ( ) Updating both metadata and content
+    * ( ) Creating a folder
+    * ( ) Trashing a document or folder
+    * ( ) Searching the documents feed
+      * ( ) Retrieving all word processor documents
+      * ( ) Retrieving all starred presentations
+      * ( ) Retrieving all documents in a named folder
+      * ( ) Performing a text query
+      * ( ) Retrieving all documents and folders
+    * ( ) Retrieving a list of folder contents
+    * ( ) Moving documents and folders
+      * ( ) Moving into a folder
+      * ( ) Moving out of a folder
+    * ( ) Modifying Document Sharing Permissions
+      * ( ) Overview of Document Sharing (ACLs)
+      * ( ) Retrieving the ACL feed for a Document
+      * ( ) Modifying the ACL feed for a Document
+  * ( ) Google Finance Portfolio Data API
+  * ( ) Google Health Data API
+  * ( ) Google Notebook Data API
+  * ( ) Picasa Web Albums Data API
+  * ( ) Google Spreadsheets Data API
+  * ( ) Webmaster Tools Data API
+  * ( ) YouTube Data API
