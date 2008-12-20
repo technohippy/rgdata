@@ -34,7 +34,8 @@ module RGData
 
       def update(entry, opts)
         eid = entry['id'].split('%3A').last
-        metadata = opts[:title] ? metadata(opts[:title], true, entry['gd:etag']) : nil
+        etag = entry['gd:etag']
+        metadata = opts[:title] ? metadata(opts[:title], true, etag) : nil
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)
         header ={}
@@ -54,14 +55,12 @@ module RGData
           data = content
           header['Content-Type'] = content_type(filepath)
           header['Slug'] = File.exist?(filepath) ? File.basename(filepath) : "temporary.#{filepath}"
+          header['If-Match'] = etag
           link = service.edit_media_path(entry.category.label, eid)
         else
           raise ArgumentError.new('filepath or metadata must exist')
         end
         header['Content-Length'] = data.size.to_s
-puts ">>"
-puts data
-puts ">>"
 
         response = put_request(link, data, header)
       end

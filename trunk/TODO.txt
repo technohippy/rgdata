@@ -3,6 +3,7 @@
   * Error handling
   * Develop a client app for instance
   * Create my own xml library
+  * Refactor: merge DocumentsList::Client#upload and #update
 
 == APIs and Features ==
   * ( ) Google Apps APIs
@@ -19,10 +20,10 @@
       * (-) Uploading content with metadata
       * (v) Uploading content without metadata
       * (v) Uploading only metadata (no content)
-    * ( ) Updating documents
-      * ( ) Updating metadata
-      * ( ) Updating content
-      * ( ) Updating both metadata and content
+    * (v) Updating documents
+      * (v) Updating metadata
+      * (v) Updating content
+      * (v) Updating both metadata and content
     * ( ) Creating a folder
     * ( ) Trashing a document or folder
     * ( ) Searching the documents feed
