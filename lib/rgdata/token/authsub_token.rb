@@ -44,7 +44,8 @@ module RGData
       end
 
       def header
-        {'Authorization' => %Q[AuthSub token="#{@token_value}"]}
+        #{'Authorization' => %Q[AuthSub token="#{@token_value}"]}
+        {'Authorization' => %Q[AuthSub token="#{@token_value}"], 'GData-Version' => '2'}
       end
     end
   end

@@ -1,6 +1,7 @@
-require 'rgdata/service'
+require 'pp'
 require 'net/http'
 require 'net/https'
+require 'rgdata/service'
 
 module RGData
   VERSION = '1.0.0'
