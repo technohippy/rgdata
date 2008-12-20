@@ -23,6 +23,7 @@ module RGData
 
     def post_request(path, data, header={})
       Net::HTTP.start(service.uri, 80) do |http|
+puts token.header.merge(header).inspect
         http.post(path, data, token.header.merge(header))
       end
     end

@@ -19,8 +19,8 @@ module RGData
         '/feeds/documents/private/full'
       end
 
+      # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#UploadingWMetadata
       def metadata(title)
-        # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#UploadingWMetadata
         %Q{
 <?xml version='1.0' encoding='UTF-8'?>
 <atom:entry xmlns:atom="http://www.w3.org/2005/Atom">

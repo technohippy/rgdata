@@ -1,4 +1,5 @@
 = TODO =
+  * Add response class to handle response
   * Error handling
   * Develop a client app for instance
   * Spcify api version

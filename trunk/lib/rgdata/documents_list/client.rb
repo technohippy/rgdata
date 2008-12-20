@@ -28,6 +28,11 @@ Content-Type: #{content_type(filepath)}
         eos
         #{Base64.encode64(content)}
         data += "--#{boundary}--\n"
+=begin
+puts '****'
+puts data
+puts '****'
+=end
 
         header = {
           'Content-Type' => "multipart/related; boundary=#{boundary}",
