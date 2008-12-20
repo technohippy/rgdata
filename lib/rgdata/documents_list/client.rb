@@ -12,47 +12,52 @@ module RGData
         end
         metadata = metadata(title, meta)
         content = filepath ? File.read(filepath) : nil
-        boundary = "MULTIPART_BOUNDARY-#{Time.now.to_i}-#{rand(1000000)}"
-
+        header ={}
         data = ''
-        data += <<-eos if metadata
---#{boundary}
-Content-Type: application/atom+xml
-
-#{metadata}
-        eos
-        data += <<-eos if content
---#{boundary}
-Content-Type: #{content_type(filepath)}
-
-#{content}
-        eos
-        #{Base64.encode64(content)}
-        data += "--#{boundary}--\n"
-=begin
-puts '****'
-puts data
-puts '****'
-=end
-
-        header = {
-          'Content-Type' => "multipart/related; boundary=#{boundary}",
-          'Content-Length' => data.size.to_s
-        }
-        if content
-          metadata \
-            ? header.update('Slug' => File.basename(filepath)) \
-            : header.update('Slug' => title)
+        if metadata and content
+          boundary = "MULTIPART_BOUNDARY-#{Time.now.to_i}-#{rand(1000000)}"
+          data = upload_body(content, metadata, filepath, boundary)
+          header['Content-Type'] = "multipart/related; boundary=#{boundary}"
+          header['Slug'] = File.basename(filepath)
+        elsif metadata
+          data = metadata
+          header['Content-Type'] = "application/atom+xml"
+        elsif content
+          data = content
+          header['Content-Type'] = content_type(filepath)
+          header['Slug'] = title
+        else
+          raise ArgumentError.new('filepath or metadata must exist')
         end
+        header['Content-Length'] = data.size.to_s
 
         response = post_request('/feeds/documents/private/full', data, header)
       end
 
       protected
 
+      def upload_body(content, metadata, filepath, boundary)
+        return content unless metadata
+        return metadata unless content
+
+        <<-eos
+--#{boundary}
+Content-Type: application/atom+xml
+
+#{metadata}
+--#{boundary}
+Content-Type: #{content_type(filepath)}
+
+#{content}
+--#{boundary}--
+        eos
+        #{Base64.encode64(content)}
+      end
+
       def metadata(title, meta)
         case meta
         when TrueClass; service.metadata(title)
+        when FalseClass; nil
         when String;    meta
         else raise TypeError.new('metadata must be bool or string')
         end

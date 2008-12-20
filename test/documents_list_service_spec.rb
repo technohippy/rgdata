@@ -7,7 +7,7 @@ describe RGData::DocumentsList::Service do
     @client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
   end
 
-  it 'should upload csv file' do
+  it 'should upload csv file with metadata' do
     title = "RGData Test (#{Time.now})"
     filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv"
     need_metadata = true
@@ -19,8 +19,24 @@ describe RGData::DocumentsList::Service do
     print "MESSAGE:"
     puts response.message
     print "BODY:"
-    puts response.body
+    puts response.raw_body
 
+    response.code.should == 201
+  end
+
+  it 'should upload csv file without metadata' do
+    title = "RGData Test (#{Time.now})"
+    filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv"
+    need_metadata = false
+
+    response = @client.upload title, filepath, need_metadata
+    response.code.should == 201
+  end
+
+  it 'should upload only metadata' do
+    title = "RGData Test (#{Time.now})"
+
+    response = @client.upload 'new document', :metadata => true
     response.code.should == 201
   end
 
