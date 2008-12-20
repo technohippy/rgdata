@@ -1,5 +1,6 @@
 require 'base64'
 require 'xmlsimple'
+require 'rgdata/response'
 require 'rgdata/util/hash_with_accessor'
 
 module RGData
@@ -16,9 +17,10 @@ module RGData
     end
 
     def get_request(path, header={})
-      Net::HTTP.start(service.uri, 80) do |http|
+      http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.get(path, token.header.merge(header))
       end
+      Response.new(http_response)
     end
 
     def post_request(path, data, header={})
@@ -28,44 +30,19 @@ puts token.header.merge(header).inspect
       end
     end
 
-    def list_xml(etag=nil)
+    def list(etag=nil)
       token.login? or raise NeedLoggedInError
       header = etag ? {'If-None-Match' => etag} : {}
-      result = get_request(service.list_path, header)
-      check_result(result)
-      result.body
+      response = get_request(service.list_path, header)
+      check_response(response)
+      response.body
     end
 
-    def check_result(result)
+    def check_response(response)
       # TODO check and raise an error if something is wrong
     end
 
-    def list_hash(etag=nil)
-      xml2hash list_xml(etag)
-    end
-
-    def list_obj(etag=nil)
-      xml2obj list_xml(etag)
-    end
-
-    def list(etag=nil, format='obj')
-      case format.to_s.downcase
-      when 'hash';          list_hash(etag)
-      when 'xml', 'string'; list_xml(etag)
-      else;                 list_obj(etag)
-      end
-    end
-
     protected
-
-    def xml2obj(xml)
-      hash = xml2hash xml
-      Util::HashWithAccessor.from_hash hash
-    end
-
-    def xml2hash(xml)
-      XmlSimple.xml_in xml
-    end
 
     # http://code.google.com/intl/en/apis/documents/faq.html#WhatKindOfFilesCanIUpload
     def content_type(filepath)
