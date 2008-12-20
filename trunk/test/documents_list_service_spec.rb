@@ -31,8 +31,7 @@ describe RGData::DocumentsList::Service do
 
     response = @client.upload title, filepath, need_metadata
     response.code.should == 201
-    response.body.title.type.should == 'text'
-    response.body.title.content.should =~ /RGData Test/
+    response.body.author.name.should == 'RGData.Library'
   end
 
   it 'should upload only metadata' do
@@ -45,34 +44,32 @@ describe RGData::DocumentsList::Service do
   it 'should get a list of documents by method access' do
     list = @client.list
 
-    list.totalResults[0].should =~ /\d+/
-    list.totalResults[0].should_not equal('0')
+    list.totalResults.should =~ /\d+/
+    list.totalResults.should_not equal('0')
     list.entry.size.should_not equal(0)
-    list.entry[0].title[0].type.should == 'text'
-    list.entry[0].title.type.should == 'text'
+    list.entry[0].author.name.should == 'RGData.Library'
   end
 
   it 'should get a list of documents by hash access' do
     list = @client.list
 
-    list['totalResults'][0].should =~ /\d+/
-    list['totalResults'][0].should_not equal('0')
+    list['totalResults'].should =~ /\d+/
+    list['totalResults'].should_not equal('0')
     list['entry'].size.should_not equal(0)
-    list['entry'][0]['title'][0]['type'].should == 'text'
+    list['entry'][0]['author'][0]['name'].should == 'RGData.Library'
   end
 
   it 'should get a list of documents by pseudo xpath access' do
     list = @client.list
 
     list['/entry'].size.should_not equal(0)
-    list['/entry/0/title/0/type'].should == 'text'
-    list['/entry/title/type'].should == 'text'
-    list['/entry[0]/title@type'].should == 'text'
+    list['/entry/0/author/name'].should == 'RGData.Library'
+    list['/entry/author/name'].should == 'RGData.Library'
+    list['/entry[0]/author@name'].should == 'RGData.Library'
 
     first_entry = list.entry[0]
-    first_entry['/title/0/type'].should == 'text'
-    first_entry['/title/type'].should == 'text'
-    first_entry['/title@type'].should == 'text'
+    first_entry['/author/name'].should == 'RGData.Library'
+    first_entry['/author@name'].should == 'RGData.Library'
   end
 
   after(:each) do

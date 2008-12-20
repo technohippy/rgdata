@@ -18,7 +18,11 @@ module RGData
           when Hash
             self.from_hash v
           when Array
-            ArrayWithDelegationToFirst.from_array(v.map{|e| convert.call e})
+            if v.size == 1 and v.first.is_a? String
+              v.first
+            else
+              ArrayWithDelegationToFirst.from_array(v.map{|e| convert.call e})
+            end
           else
             v
           end

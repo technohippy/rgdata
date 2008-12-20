@@ -35,7 +35,8 @@ module RGData
       end
 
       def header
-        {'Authorization' => "GoogleLogin auth=#{@token_value}"}
+        #{'Authorization' => "GoogleLogin auth=#{@token_value}"}
+        {'Authorization' => "GoogleLogin auth=#{@token_value}", 'GData-Version' => '2'}
       end
     end
   end
