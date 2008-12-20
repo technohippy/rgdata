@@ -10,40 +10,28 @@ describe RGData::DocumentsList::Service do
   it 'should update metadata' do
     entry = @client.list.entry.first
     response = @client.update(entry, :title => 'updated')
-
-    print "CODE:"
-    puts response.code
-    print "MESSAGE:"
-    puts response.message
-    print "BODY:"
-    puts response.raw_body.gsub('&quot;', '"')
-
-    response.code.should == 201
-
+    response.code.should == 200
     #entry = @client.list.entry[1]
     #entry.update(:title => 'updated2')
-
     #entry = @client.list.entry[1]
     #entry.title = 'updated title'
     #entry.content = 'updated content'
     #entry.update!
   end
 
-=begin
   it 'should update content' do
     entry = @client.list.entry.first
-    response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'csv')
-
-    print "CODE:"
-    puts response.code
-    print "MESSAGE:"
-    puts response.message
-    print "BODY:"
-    puts response.raw_body
-
-    response.code.should == 201
+    response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'txt')
+    response.code.should == 200
+    response.body.author.name.should == 'RGData.Library'
   end
-=end
+
+  it 'should update title and content' do
+    entry = @client.list.entry.first
+    response = @client.update(entry, :title => 'modify title and content', :content => "#{rand(10000)},2,3\n4,5,6\n7,8,9", :filepath => 'txt')
+    response.code.should == 200
+    response.body.author.name.should == 'RGData.Library'
+  end
 
   it 'should upload csv file with metadata' do
     title = "RGData Test (#{Time.now})"
