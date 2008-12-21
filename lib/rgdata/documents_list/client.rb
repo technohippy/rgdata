@@ -6,7 +6,7 @@ require 'rgdata/client'
 module RGData
   module DocumentsList
     class Client < RGData::Client
-      def upload(title, opts)
+      def upload(title, opts={:metadata => true})
         metadata = metadata(title, opts[:metadata])
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)

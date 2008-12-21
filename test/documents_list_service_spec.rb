@@ -65,6 +65,9 @@ describe RGData::DocumentsList::Service do
 
     response = @client.upload 'new document', :metadata => true
     response.code.should == 201
+
+    response = @client.upload 'new document2'
+    response.code.should == 201
   end
 
   it 'should get a list of documents by method access' do
