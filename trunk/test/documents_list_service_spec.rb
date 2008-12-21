@@ -8,7 +8,8 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should update metadata' do
-    entry = @client.list.entry.first
+    response = @client.list
+    entry = response.body.entry.first
     response = @client.update(entry, :title => 'updated')
     response.code.should == 200
     #entry = @client.list.entry[1]
@@ -20,14 +21,16 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should update content' do
-    entry = @client.list.entry.first
+    response = @client.list
+    entry = response.body.entry.first
     response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
   end
 
   it 'should update title and content' do
-    entry = @client.list.entry.first
+    response = @client.list
+    entry = response.body.entry.first
     response = @client.update(entry, :title => 'modify title and content', :content => "#{rand(10000)},2,3\n4,5,6\n7,8,9", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
@@ -71,7 +74,8 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should get a list of documents by method access' do
-    list = @client.list
+    response = @client.list
+    list = response.body
 
     list.totalResults.should =~ /\d+/
     list.totalResults.should_not equal('0')
@@ -80,7 +84,8 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should get a list of documents by hash access' do
-    list = @client.list
+    response = @client.list
+    list = response.body
 
     list['totalResults'].should =~ /\d+/
     list['totalResults'].should_not equal('0')
@@ -89,7 +94,8 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should get a list of documents by pseudo xpath access' do
-    list = @client.list
+    response = @client.list
+    list = response.body
 
     list['/entry'].size.should_not equal(0)
     list['/entry/0/author/name'].should == 'RGData.Library'

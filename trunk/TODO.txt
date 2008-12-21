@@ -1,9 +1,9 @@
 = TODO =
+  * Cache the result of Response#body_obj and #body_hash
   * Create specific objects for entry and entry list
   * Error handling
   * Develop a client app for instance
   * Create my own xml library
-  * Return RGData::Response as a result of list method
 
 == APIs and Features ==
   * ( ) Google Apps APIs
@@ -50,6 +50,7 @@
 
 = DONE =
   * 2008/12/21
+    * Return RGData::Response as a result of list method
     * Refactor: merge DocumentsList::Client#upload and #update
   * 2008/12/20
     * Add response class to handle response

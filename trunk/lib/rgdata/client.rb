@@ -18,21 +18,21 @@ module RGData
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.get(path, token.header.merge(header))
       end
-      Response.new(http_response)
+      response_class.new(http_response)
     end
 
     def post_request(path, data, header={})
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.post(path, data, token.header.merge(header))
       end
-      Response.new(http_response)
+      response_class.new(http_response)
     end
 
     def put_request(path, data, header={})
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.put(path, data, token.header.merge(header))
       end
-      Response.new(http_response)
+      response_class.new(http_response)
     end
 
     def list(etag=nil)
@@ -48,6 +48,10 @@ module RGData
     end
 
     protected
+
+    def response_class
+      ::RGData::Response
+    end
 
     # http://code.google.com/intl/en/apis/documents/faq.html#WhatKindOfFilesCanIUpload
     def content_type(filepath)
