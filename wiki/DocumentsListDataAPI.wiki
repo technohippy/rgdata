@@ -8,9 +8,9 @@ Ref. http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_pro
 
 = Retrieving a list of documents =
 {{{
-@service = RGData::DocumentsList::Service.new
-@client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
-documents = @client.list
+service = RGData::DocumentsList::Service.new
+client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
+documents = client.list
 documents.totalResults # => the number of your docs
 documents.entry[0].author.name # => 'RGData.Library'
 }}}
@@ -18,21 +18,21 @@ documents.entry[0].author.name # => 'RGData.Library'
 = Uploading documents =
 {{{
 # Upload an existing document
-@service = RGData::DocumentsList::Service.new
-@client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
+service = RGData::DocumentsList::Service.new
+client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 title = 'Uploaded Document'
 filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv" 
-response = @client.upload title, :filepath => filepath
+response = client.upload title, :filepath => filepath
 response.code # => 201
 response.body.author.name # => 'RGData.Library' 
 }}}
 
 {{{
 # Create new document
-@service = RGData::DocumentsList::Service.new
-@client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
+service = RGData::DocumentsList::Service.new
+client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 title = 'New Document'
-response = @client.upload title
+response = client.upload title
 response.code # => 201
 response.body.author.name # => 'RGData.Library' 
 }}}
