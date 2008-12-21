@@ -40,7 +40,7 @@ module RGData
       header = etag ? {'If-None-Match' => etag} : {}
       response = get_request(service.list_path, header)
       check_response(response)
-      response.body
+      response
     end
 
     def check_response(response)

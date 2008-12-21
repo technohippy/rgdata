@@ -3,7 +3,6 @@
   * Error handling
   * Develop a client app for instance
   * Create my own xml library
-  * Refactor: merge DocumentsList::Client#upload and #update
   * Return RGData::Response as a result of list method
 
 == APIs and Features ==
@@ -50,6 +49,8 @@
   * ( ) YouTube Data API
 
 = DONE =
+  * 2008/12/21
+    * Refactor: merge DocumentsList::Client#upload and #update
   * 2008/12/20
     * Add response class to handle response
     * Spcify api version (ver.2)
