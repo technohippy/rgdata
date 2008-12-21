@@ -32,3 +32,5 @@ response.body.author.name # => 'RGData.Library'
 @client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
 response = @client.upload title
 }}}
+
+= Updating documents =
