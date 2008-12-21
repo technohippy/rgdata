@@ -4,6 +4,7 @@
   * Develop a client app for instance
   * Create my own xml library
   * Refactor: merge DocumentsList::Client#upload and #update
+  * Return RGData::Response as a result of list method
 
 == APIs and Features ==
   * ( ) Google Apps APIs
