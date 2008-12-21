@@ -10,35 +10,21 @@ module RGData
         metadata = metadata(title, opts[:metadata])
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)
-        header ={}
-        data = ''
-        if metadata and content
-          boundary = "MULTIPART_BOUNDARY-#{Time.now.to_i}-#{rand(1000000)}"
-          data = upload_body(content, metadata, filepath, boundary)
-          header['Content-Type'] = "multipart/related; boundary=#{boundary}"
-          header['Slug'] = File.basename(filepath)
-        elsif metadata
-          data = metadata
-          header['Content-Type'] = "application/atom+xml"
-        elsif content
-          data = content
-          header['Content-Type'] = content_type(filepath)
-          header['Slug'] = title
-        else
-          raise ArgumentError.new('filepath or metadata must exist')
-        end
-        header['Content-Length'] = data.size.to_s
-
-        response = post_request(service.new_path, data, header)
+        response = post_request(*create_upload_params(metadata, content, filepath))
       end
 
       def update(entry, opts)
-        eid = entry['id'].split('%3A').last
-        etag = entry['gd:etag']
-        metadata = opts[:title] ? metadata(opts[:title], true, etag) : nil
+        metadata = opts[:title] ? metadata(opts[:title], true, entry['gd:etag']) : nil
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)
-        header ={}
+        response = put_request(*create_upload_params(metadata, content, filepath, entry))
+      end
+
+      protected
+
+      def create_upload_params(metadata, content, filepath, entry=nil)
+        eid = entry ? entry['id'].split('%3A').last : nil
+        header = {}
         data = nil
         link = nil
         if metadata and content
@@ -46,26 +32,30 @@ module RGData
           data = upload_body(content, metadata, filepath, boundary)
           header['Content-Type'] = "multipart/related; boundary=#{boundary}"
           header['Slug'] = File.exist?(filepath) ? File.basename(filepath) : "teporary.#{filepath}"
-          link = service.edit_media_path(entry.category.label, eid)
+          link = entry \
+            ? service.edit_media_path(entry.category.label, eid) \
+            : service.new_path
         elsif metadata
           data = metadata
           header['Content-Type'] = "application/atom+xml"
-          link = service.edit_path(entry.category.label, eid)
+          link = entry \
+            ? service.edit_path(entry.category.label, eid) \
+            : service.new_path
         elsif content
           data = content
           header['Content-Type'] = content_type(filepath)
           header['Slug'] = File.exist?(filepath) ? File.basename(filepath) : "temporary.#{filepath}"
-          header['If-Match'] = etag
-          link = service.edit_media_path(entry.category.label, eid)
+          header['If-Match'] = entry['gd:etag'] if entry
+          link = entry \
+            ? service.edit_media_path(entry.category.label, eid) \
+            : service.new_path
         else
           raise ArgumentError.new('filepath or metadata must exist')
         end
         header['Content-Length'] = data.size.to_s
 
-        response = put_request(link, data, header)
+        [link, data, header]
       end
-
-      protected
 
       def upload_body(content, metadata, filepath, boundary)
         return content unless metadata
