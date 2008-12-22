@@ -12,11 +12,11 @@ module RGData
         end
       end
 
-      def self.from_hash(hash)
+      def self.from_hash(hash, client)
         convert = lambda do |v|
           case v
           when Hash
-            self.from_hash v
+            self.from_hash v, client
           when Array
             if v.size == 1 and v.first.is_a? String
               v.first
@@ -29,6 +29,7 @@ module RGData
         end
 
         ret = self.new
+        ret[:client] = client
         hash.each{|k, v| ret[k] = convert.call v}
         ret
       end

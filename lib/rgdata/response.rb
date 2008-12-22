@@ -3,8 +3,9 @@ require 'rgdata/util/hash_with_accessor'
 
 module RGData
   class Response
-    def initialize(http_response)
+    def initialize(client, http_response)
       @http_response = http_response
+      @client = client
     end
 
     def code
@@ -17,6 +18,10 @@ module RGData
 
     def error?
       not success?
+    end
+
+    def raise_error!
+      @http_response.error!
     end
 
     def message
@@ -49,7 +54,7 @@ module RGData
 
     def xml2obj(xml)
       hash = xml2hash xml
-      Util::HashWithAccessor.from_hash hash
+      Util::HashWithAccessor.from_hash(hash, @client)
     end
 
     def xml2hash(xml)

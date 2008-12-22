@@ -1,7 +1,6 @@
-require 'base64'
-require 'pathname'
 require 'uri'
 require 'rgdata/client'
+require 'rgdata/documents_list/response'
 
 module RGData
   module DocumentsList
@@ -21,6 +20,10 @@ module RGData
       end
 
       protected
+
+      def response_class
+        ::RGData::DocumentsList::Response
+      end
 
       def create_upload_params(metadata, content, filepath, entry=nil)
         eid = entry ? entry['id'].split('%3A').last : nil
