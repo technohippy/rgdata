@@ -19,6 +19,16 @@ module RGData
         response = put_request(*create_upload_params(metadata, content, filepath, entry))
       end
 
+      def create_folder(title)
+        link = service.create_folder_path
+        data = service.folder_metadata(title)
+        header = {
+          'Content-Length' => data.size.to_s,
+          'Content-Type' => 'application/atom+xml'
+        }
+        response = post_request(link, data, header)
+      end
+
       protected
 
       def response_class

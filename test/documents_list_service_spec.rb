@@ -7,6 +7,11 @@ describe RGData::DocumentsList::Service do
     @client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
   end
 
+  it 'should create a folder' do
+    response = @client.create_folder('New Folder')
+    response.code.should == 201
+  end
+
   it 'should update metadata' do
     list_response = @client.list
     entry = list_response.body.entry.first
