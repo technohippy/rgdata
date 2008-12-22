@@ -48,14 +48,14 @@ There are three ways.
 {{{
 list_response = @client.list
 entry = list_response.body.entry.first
-response = @client.update(entry, :title => 'updated')
+@client.update(entry, :title => 'updated')
 }}}
 
 2nd
 {{{
 list_response = @client.list
 entry = list_response.body.entry.first
-response = entry.update!(:title => 'updated title')
+entry.update!(:title => 'updated title')
 }}}
 
 3rd
@@ -63,7 +63,7 @@ response = entry.update!(:title => 'updated title')
 list_response = @client.list
 entry = list_response.body.entry.first
 entry.title = 'updated title'
-response = entry.update!
+entry.update!
 }}}
 
 = Creating a folder =
