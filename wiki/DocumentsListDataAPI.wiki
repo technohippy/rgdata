@@ -68,3 +68,8 @@ entry.title = 'updated title'
 response = entry.update!
 response.code.should == 200 
 }}}
+
+= Creating a folder =
+{{{
+@client.create_folder('New Folder')
+}}}
