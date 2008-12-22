@@ -23,7 +23,7 @@ documents.entry[0].author.name # => 'RGData.Library'
 service = RGData::DocumentsList::Service.new
 client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 title = 'Uploaded Document'
-filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv" 
+filepath = "./documents_list_upload.csv" 
 response = client.upload title, :filepath => filepath
 response.code # => 201
 entry = response.body
