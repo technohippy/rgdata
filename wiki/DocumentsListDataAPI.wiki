@@ -11,6 +11,7 @@ Ref. http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_pro
 service = RGData::DocumentsList::Service.new
 client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 response = client.list
+response.code # => 200
 documents = response.body
 documents.totalResults # => the number of your docs
 documents.entry[0].author.name # => 'RGData.Library'
