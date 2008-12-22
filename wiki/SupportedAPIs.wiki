@@ -27,7 +27,7 @@ I'm manually copying this page from TODO.txt, so that this list might be a bit o
       * (v) Updating metadata
       * (v) Updating content
       * (v) Updating both metadata and content
-    * ( ) Creating a folder
+    * (v) Creating a folder
     * ( ) Trashing a document or folder
     * ( ) Searching the documents feed
       * ( ) Retrieving all word processor documents
