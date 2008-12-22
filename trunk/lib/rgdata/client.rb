@@ -18,33 +18,27 @@ module RGData
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.get(path, token.header.merge(header))
       end
-      response_class.new(http_response)
+      response_class.new(self, http_response)
     end
 
     def post_request(path, data, header={})
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.post(path, data, token.header.merge(header))
       end
-      response_class.new(http_response)
+      response_class.new(self, http_response)
     end
 
     def put_request(path, data, header={})
       http_response = Net::HTTP.start(service.uri, 80) do |http|
         http.put(path, data, token.header.merge(header))
       end
-      response_class.new(http_response)
+      response_class.new(self, http_response)
     end
 
     def list(etag=nil)
       token.login? or raise NeedLoggedInError
       header = etag ? {'If-None-Match' => etag} : {}
-      response = get_request(service.list_path, header)
-      check_response(response)
-      response
-    end
-
-    def check_response(response)
-      # TODO check and raise an error if something is wrong
+      get_request(service.list_path, header)
     end
 
     protected

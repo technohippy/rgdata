@@ -8,29 +8,38 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should update metadata' do
-    response = @client.list
-    entry = response.body.entry.first
+    list_response = @client.list
+    entry = list_response.body.entry.first
     response = @client.update(entry, :title => 'updated')
     response.code.should == 200
-    #entry = @client.list.entry[1]
-    #entry.update(:title => 'updated2')
-    #entry = @client.list.entry[1]
-    #entry.title = 'updated title'
-    #entry.content = 'updated content'
-    #entry.update!
+  end
+
+  it 'should update metadata with hash' do
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    response = entry.update!(:title => 'updated title')
+    response.code.should == 200
+  end
+
+  it 'should update metadata with equal method' do
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    entry.title = 'updated title'
+    response = entry.update!
+    response.code.should == 200
   end
 
   it 'should update content' do
-    response = @client.list
-    entry = response.body.entry.first
+    list_response = @client.list
+    entry = list_response.body.entry.first
     response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
   end
 
   it 'should update title and content' do
-    response = @client.list
-    entry = response.body.entry.first
+    list_response = @client.list
+    entry = list_response.body.entry.first
     response = @client.update(entry, :title => 'modify title and content', :content => "#{rand(10000)},2,3\n4,5,6\n7,8,9", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
