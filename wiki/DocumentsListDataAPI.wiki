@@ -10,7 +10,8 @@ Ref. http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_pro
 {{{
 service = RGData::DocumentsList::Service.new
 client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
-documents = client.list
+response = client.list
+documents = response.body
 documents.totalResults # => the number of your docs
 documents.entry[0].author.name # => 'RGData.Library'
 }}}
@@ -24,7 +25,8 @@ title = 'Uploaded Document'
 filepath = "#{File.dirname(__FILE__)}/rsc/documents_list_upload.csv" 
 response = client.upload title, :filepath => filepath
 response.code # => 201
-response.body.author.name # => 'RGData.Library' 
+entry = response.body
+entry.author.name # => 'RGData.Library' 
 }}}
 
 {{{
@@ -34,7 +36,8 @@ client = service.login 'RGData.Library@gmail.com', 'rgdatatest'
 title = 'New Document'
 response = client.upload title
 response.code # => 201
-response.body.author.name # => 'RGData.Library' 
+entry = response.body
+entry.author.name # => 'RGData.Library' 
 }}}
 
 = Updating documents =
