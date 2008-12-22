@@ -49,7 +49,6 @@ There are three ways.
 list_response = @client.list
 entry = list_response.body.entry.first
 response = @client.update(entry, :title => 'updated')
-response.code.should == 200 
 }}}
 
 2nd
@@ -57,7 +56,6 @@ response.code.should == 200
 list_response = @client.list
 entry = list_response.body.entry.first
 response = entry.update!(:title => 'updated title')
-response.code.should == 200 
 }}}
 
 3rd
@@ -66,7 +64,6 @@ list_response = @client.list
 entry = list_response.body.entry.first
 entry.title = 'updated title'
 response = entry.update!
-response.code.should == 200 
 }}}
 
 = Creating a folder =
