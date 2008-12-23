@@ -37,6 +37,42 @@ module RGData
       end
       alias delete trash
 
+      def retrieve(opts={})
+        if opts.empty?
+          list
+        elsif opts[:folder]
+          retrieve_folder opts[:folder]
+        else
+          retrieve_category opts
+        end
+      end
+
+      def retrieve_folder(folder_id)
+        get_request("#{service.folder_path}/folder%3A#{folder_id}")
+      end
+
+      def retrieve_category(opts={})
+        category_path = lambda do |arg|
+          case arg
+          when String, Symbol
+            arg.to_s
+          when Hash
+            cat, email = arg.to_a.first
+            "{http:%2F%2Fschemas.google.com%2Fdocs%2F2007%2Ffolders%2F#{email}}#{cat}"
+          when Array
+            arg.map{|c| category_path.call(c)}.join('/')
+          else
+            raise ArgumentError.new('argument should be string, symbol, array, or hash')
+          end
+        end
+
+        link = service.list_path
+        link += "/-/#{category_path.call(opts[:category])}" if opts[:category]
+        link += "?q=#{URI.encode(opts[:query])}" if opts[:query]
+        link += "#{opts[:query] ? '&' : '?'}showfolders=true" if opts[:show_folders] or opts[:showfolders]
+        get_request(link)
+      end
+
       protected
 
       def response_class

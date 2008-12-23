@@ -1,0 +1,35 @@
+require 'rgdata/response'
+
+module RGData
+  module DocumentsList
+    class Response < RGData::Response
+      protected
+
+      def xml2obj(xml)
+        obj = super
+        if obj['entry']
+          obj.entry.each do |entry|
+            def entry.delete!(opts={})
+              self[:client].trash(self, opts)
+            end
+
+            def entry.update!(opts={})
+              @new_title = opts[:title] if opts[:title]
+              @new_content = opts[:content] if opts[:content]
+              self[:client].update(self, :title => @new_title, :content => @new_content)
+            end
+
+            def entry.title=(val)
+              @new_title = val
+            end
+
+            def entry.content=(val)
+              @new_content = val
+            end
+          end
+        end
+        obj
+      end
+    end
+  end
+end

@@ -7,6 +7,50 @@ describe RGData::DocumentsList::Service do
     @client = @service.login 'RGData.Library@gmail.com', 'rgdatatest'
   end
 
+  it 'should retrieve documents' do
+    response = @client.retrieve :category => 'document'
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+
+  it 'should retrieve starred presentations' do
+    response = @client.retrieve :category => ['presentation', 'starred']
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+
+  it 'should retrieve documents in a folder named starred' do
+    response = @client.retrieve :category => {'starred' => :current_user}
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+
+  it 'should retrieve document by a text query' do
+    response = @client.retrieve :query => 'example query'
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+
+  it 'should retrieve all documents and folders' do
+    response = @client.retrieve :show_folders => true
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+
+  it 'should retrieve a list of folder contents' do
+    folder_id = 'hello'
+    response = @client.retrieve :folder => folder_id
+    response.code.should == 200
+    list = response.body
+    list.entry.size.should > 0
+  end
+=begin
+
   it 'should create a folder' do
     response = @client.create_folder('New Folder')
     response.code.should == 201
@@ -142,6 +186,7 @@ describe RGData::DocumentsList::Service do
     response = entry.delete!
     response.code.should == 200
   end
+=end
 
   after(:each) do
     @service = nil
