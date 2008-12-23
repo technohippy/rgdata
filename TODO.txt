@@ -26,12 +26,12 @@
       * (v) Updating both metadata and content
     * (v) Creating a folder
     * (v) Trashing a document or folder
-    * ( ) Searching the documents feed
-      * ( ) Retrieving all word processor documents
-      * ( ) Retrieving all starred presentations
+    * (-) Searching the documents feed
+      * (v) Retrieving all word processor documents
+      * (v) Retrieving all starred presentations
       * ( ) Retrieving all documents in a named folder
-      * ( ) Performing a text query
-      * ( ) Retrieving all documents and folders
+      * (v) Performing a text query
+      * (v) Retrieving all documents and folders
     * ( ) Retrieving a list of folder contents
     * ( ) Moving documents and folders
       * ( ) Moving into a folder

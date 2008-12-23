@@ -15,6 +15,10 @@ module RGData
         ::RGData::DocumentsList::Client
       end
 
+      def folder_path
+        '/feeds/folders/private/full'
+      end
+
       def list_path
         '/feeds/documents/private/full'
       end
