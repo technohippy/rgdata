@@ -70,3 +70,22 @@ entry = list_response.body.entry.first
 {{{
 @client.create_folder('New Folder')
 }}}
+
+= Trashing documents and folders =
+trash if not changed
+{{{
+entry.delete
+}}}
+
+{{{
+@client.trash(entry)
+}}}
+
+trash anyway
+{{{
+entry.delete :force => true
+}}}
+
+{{{
+@client.trash(entry, :force => true)
+}}}
