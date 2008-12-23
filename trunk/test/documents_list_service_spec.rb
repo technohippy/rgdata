@@ -10,6 +10,7 @@ describe RGData::DocumentsList::Service do
   it 'should create a folder' do
     response = @client.create_folder('New Folder')
     response.code.should == 201
+    response.body.author.name.should == 'rgdata.library'
   end
 
   it 'should update metadata' do
