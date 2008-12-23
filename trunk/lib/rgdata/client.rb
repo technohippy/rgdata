@@ -35,6 +35,13 @@ module RGData
       response_class.new(self, http_response)
     end
 
+    def delete_request(path, header={})
+      http_response = Net::HTTP.start(service.uri, 80) do |http|
+        http.delete(path, token.header.merge(header))
+      end
+      response_class.new(self, http_response)
+    end
+
     def list(etag=nil)
       token.login? or raise NeedLoggedInError
       header = etag ? {'If-None-Match' => etag} : {}

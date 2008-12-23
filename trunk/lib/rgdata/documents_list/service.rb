@@ -35,6 +35,10 @@ module RGData
         "/feeds/media/private/full/#{category}%3A#{eid}"
       end
 
+      def delete_path(category, eid)
+        edit_path(category, eid)
+      end
+
       # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#UploadingWMetadata
       # http://code.google.com/intl/ja/apis/documents/docs/2.0/developers_guide_protocol.html#UpdatingMetadata
       def metadata(title, etag=nil)
