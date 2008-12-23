@@ -9,14 +9,14 @@ module RGData
         metadata = metadata(title, opts[:metadata])
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)
-        response = post_request(*create_upload_params(metadata, content, filepath))
+        post_request(*create_upload_params(metadata, content, filepath))
       end
 
       def update(entry, opts)
         metadata = opts[:title] ? metadata(opts[:title], true, entry['gd:etag']) : nil
         filepath = opts[:filepath]
         content = opts[:content] || (filepath ? File.read(filepath) : nil)
-        response = put_request(*create_upload_params(metadata, content, filepath, entry))
+        put_request(*create_upload_params(metadata, content, filepath, entry))
       end
 
       def create_folder(title)
@@ -26,8 +26,16 @@ module RGData
           'Content-Length' => data.size.to_s,
           'Content-Type' => 'application/atom+xml'
         }
-        response = post_request(link, data, header)
+        post_request(link, data, header)
       end
+
+      def trash(entry, opts={})
+        eid = entry ? entry['id'].split('%3A').last : nil
+        header = {'IF-Match' => (opts[:force] ? entry['gd:etag'] : '*')}
+        link = service.delete_path(entry.category.label, eid)
+        delete_request(link, header)
+      end
+      alias delete trash
 
       protected
 

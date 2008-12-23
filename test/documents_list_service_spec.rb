@@ -122,6 +122,20 @@ describe RGData::DocumentsList::Service do
     first_entry['/author@name'].should == 'RGData.Library'
   end
 
+  it 'should trash documents and folders if not changed' do
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    response = @client.trash(entry)
+    response.code.should == 200
+  end
+
+  it 'should trash documents and folders anyway' do
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    response = @client.trash(entry, :force => true)
+    response.code.should == 200
+  end
+
   after(:each) do
     @service = nil
     @client = nil

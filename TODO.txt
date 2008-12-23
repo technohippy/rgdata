@@ -1,6 +1,6 @@
 = TODO =
   * Cache the result of Response#body_obj and #body_hash
-  * Create specific objects for entry and entry list
+  * Create specific objects for entry list
   * Error handling
   * Develop a client app for instance
   * Create my own xml library
@@ -49,6 +49,8 @@
   * ( ) YouTube Data API
 
 = DONE =
+  * 2008/12/22
+    * Create specific objects for entry
   * 2008/12/21
     * Return RGData::Response as a result of list method
     * Refactor: merge DocumentsList::Client#upload and #update
