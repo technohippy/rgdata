@@ -18,6 +18,7 @@ module RGData
           "&session=#{options[:session] ? 1 : 0}" +
           "&hd=#{options[:hd]}"
       end
+      class <<self; alias login_url login_uri; end
 
       def initialize(service, token_value)
         @service, @token_value = service, token_value
