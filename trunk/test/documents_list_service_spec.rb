@@ -136,6 +136,13 @@ describe RGData::DocumentsList::Service do
     response.code.should == 200
   end
 
+  it 'should trash documents and folders with method' do
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    response = entry.delete!
+    response.code.should == 200
+  end
+
   after(:each) do
     @service = nil
     @client = nil
