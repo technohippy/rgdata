@@ -2,7 +2,7 @@
 <atom:entry xmlns:atom="http://www.w3.org/2005/Atom" 
 <%- if etag -%>
     xmlns:gd="http://schemas.google.com/g/2005" 
-    gd:etag="<%= etag.gsub('"', '&quot;') %>"
+    gd:etag="<%=h etag %>"
 <%- end -%>
 >
   <atom:category scheme="http://schemas.google.com/g/2005#kind"
