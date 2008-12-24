@@ -7,9 +7,17 @@ module RGData
 
       def xml2obj(xml)
         obj = super
+        if obj['totalResults']
+          obj['totalResults'] = obj['totalResults'].to_i
+          obj['entry'] = [] if obj['totalResults'] == 0
+        end
         if obj['entry']
           obj.entry.each do |entry|
             def entry.delete!(opts={})
+              self[:client].trash(self, opts)
+            end
+
+            def entry.trush!(opts={})
               self[:client].trash(self, opts)
             end
 

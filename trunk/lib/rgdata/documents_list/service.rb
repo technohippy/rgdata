@@ -9,6 +9,8 @@ module RGData
 
       def initialize
         super SERVICE_NAME, SERVICE_URI
+        @visibility = 'private'
+        @projection = 'full'
       end
 
       def client_class
@@ -19,20 +21,20 @@ module RGData
         '/feeds/folders/private/full'
       end
 
-      def list_path
-        '/feeds/documents/private/full'
+      def list_path(opts={})
+        "/feeds/documents/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}"
       end
 
-      def new_path
-        list_path
+      def new_path(opts={})
+        list_path(opts)
       end
 
-      def create_folder_path
-        list_path
+      def create_folder_path(opts={})
+        list_path(opts)
       end
 
-      def edit_path(category, eid)
-        "/feeds/documents/private/full/#{category}%3A#{eid}"
+      def edit_path(category, eid, opts={})
+        "/feeds/documents/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}/#{category}%3A#{eid}"
       end
 
       def edit_media_path(category, eid)
