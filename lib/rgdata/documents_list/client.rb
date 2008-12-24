@@ -70,6 +70,7 @@ module RGData
         link += "/-/#{category_path.call(opts[:category])}" if opts[:category]
         link += "?q=#{URI.encode(opts[:query])}" if opts[:query]
         link += "#{opts[:query] ? '&' : '?'}showfolders=true" if opts[:show_folders] or opts[:showfolders]
+        link += "#{opts[:query] ? '&' : '?'}showdeleted=true" if opts[:show_deleted] or opts[:showdeleted]
         get_request(link)
       end
 
