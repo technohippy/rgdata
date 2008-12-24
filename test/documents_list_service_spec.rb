@@ -67,6 +67,10 @@ describe RGData::DocumentsList::Service do
     list_response = @client.list
     entry = list_response.body.entry.first
     response = entry.update!(:title => 'updated title')
+if response.error?
+  puts ">>>>#{response.message}"
+  puts ">>>>#{response.raw_body}"
+end
     response.code.should == 200
   end
 

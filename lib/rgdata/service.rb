@@ -5,6 +5,8 @@ require 'rgdata/token/authsub_token'
 
 module RGData
   class Service
+    include ERB::Util
+
     attr_accessor :name, :uri, :company_name, :application_name, :version_id, :token
 
     def initialize(service_name='xapi', service_uri=nil)
