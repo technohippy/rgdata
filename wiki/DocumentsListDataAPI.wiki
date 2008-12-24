@@ -42,9 +42,6 @@ entry.author.name # => 'RGData.Library'
 }}}
 
 = Updating documents =
-There are three ways.
-
-1st
 {{{
 list_response = @client.list
 entry = list_response.body.entry.first
@@ -52,14 +49,6 @@ entry.title = 'updated title'
 entry.update!
 }}}
 
-2nd
-{{{
-list_response = @client.list
-entry = list_response.body.entry.first
-entry.update!(:title => 'updated title')
-}}}
-
-3rd
 {{{
 list_response = @client.list
 entry = list_response.body.entry.first
