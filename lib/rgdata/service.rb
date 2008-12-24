@@ -1,3 +1,4 @@
+require 'erb'
 require 'rgdata/client'
 require 'rgdata/token/client_token'
 require 'rgdata/token/authsub_token'
@@ -45,6 +46,13 @@ module RGData
       self.class.oauth_login_uri
     end
     alias oauth_login_url oauth_login_uri
+
+    protected
+
+    def template(template_path, binding=TOP_LEVEL_BINDING)
+      script = File.read("#{File.dirname(__FILE__)}/#{template_path}.erb")
+      ERB.new(script, nil, '-').result(binding)
+    end
 
     ## extension points for subclasses ##
 

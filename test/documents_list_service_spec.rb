@@ -49,7 +49,6 @@ describe RGData::DocumentsList::Service do
     list = response.body
     list.totalResults.should == 0
   end
-=begin
 
   it 'should create a folder' do
     response = @client.create_folder('New Folder')
@@ -136,8 +135,8 @@ describe RGData::DocumentsList::Service do
     response = @client.list
     list = response.body
 
-    list.totalResults.should =~ /\d+/
-    list.totalResults.should_not equal('0')
+    list.totalResults.should_not equal(nil)
+    list.totalResults.should_not equal(0)
     list.entry.size.should_not equal(0)
     list.entry[0].author.name.should == 'RGData.Library'
   end
@@ -146,8 +145,8 @@ describe RGData::DocumentsList::Service do
     response = @client.list
     list = response.body
 
-    list['totalResults'].should =~ /\d+/
-    list['totalResults'].should_not equal('0')
+    list.totalResults.should_not equal(nil)
+    list.totalResults.should_not equal(0)
     list['entry'].size.should_not equal(0)
     list['entry'][0]['author'][0]['name'].should == 'RGData.Library'
   end
@@ -186,7 +185,6 @@ describe RGData::DocumentsList::Service do
     response = entry.delete!
     response.code.should == 200
   end
-=end
 
   after(:each) do
     @service = nil
