@@ -22,7 +22,7 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should retrieve documents in a folder named starred' do
-    response = @client.retrieve :category => {'starred' => :current_user}
+    response = @client.retrieve :category => {'starred' => 'RGData.Library@gmail.com'}
     response.code.should == 200
     list = response.body
     list.entry.size.should > 0
