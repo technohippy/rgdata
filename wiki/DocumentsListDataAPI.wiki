@@ -78,3 +78,24 @@ entry.delete :force => true
 {{{
 @client.trash(entry, :force => true)
 }}}
+
+= Retrieveing a list of documents =
+{{{
+@client.retrieve :category => 'document'
+}}}
+
+{{{
+@client.retrieve :category => ['presentation', 'starred']
+}}}
+
+{{{
+@client.retrieve :category => {'starred' => 'RGData.Library@gmail.com'}
+}}}
+
+{{{
+@client.retrieve :query => 'example query'
+}}}
+
+{{{
+@client.retrieve :show_folders => true
+}}}
