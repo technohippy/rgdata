@@ -58,7 +58,7 @@ module RGData
             arg.to_s
           when Hash
             cat, email = arg.to_a.first
-            "{http:%2F%2Fschemas.google.com%2Fdocs%2F2007%2Ffolders%2F#{email}}#{cat}"
+            "{http:%2F%2Fschemas.google.com%2Fdocs%2F2007%2Ffolders%2F#{URI.encode(email)}}#{cat}"
           when Array
             arg.map{|c| category_path.call(c)}.join('/')
           else
