@@ -34,6 +34,10 @@ module RGData
             def entry.content=(val)
               @new_content = val
             end
+
+            def entry.id?
+              self['id'].split('%3A').last
+            end
           end
         end
         obj
