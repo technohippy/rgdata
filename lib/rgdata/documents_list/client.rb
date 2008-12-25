@@ -21,11 +21,27 @@ module RGData
 
       def create_folder(title)
         link = service.create_folder_path
-        data = service.folder_metadata(title)
+        data = service.folder_metadata(:title => title)
         header = {
           'Content-Length' => data.size.to_s,
           'Content-Type' => 'application/atom+xml'
         }
+        post_request(link, data, header)
+      end
+
+      def move(entry, folder_id)
+        docid = entry['id'].split('%3A').last
+        link = service.edit_folder_path(folder_id)
+        data = service.folder_metadata(:type => entry.category.label, :id => docid)
+        header = {
+          'Content-Length' => data.size.to_s,
+          'Content-Type' => 'application/atom+xml'
+        }
+puts ">>"
+puts link
+puts ">>"
+puts data
+puts ">>"
         post_request(link, data, header)
       end
 
