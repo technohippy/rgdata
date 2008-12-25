@@ -18,8 +18,16 @@ module RGData
         ::RGData::DocumentsList::Client
       end
 
-      def folder_path
+      def folder_path()
         '/feeds/folders/private/full'
+      end
+
+      def create_folder_path(opts={})
+        list_path(opts)
+      end
+
+      def edit_folder_path(folder_id)
+        "/feeds/folders/private/full/folder%3A#{folder_id}"
       end
 
       def list_path(opts={})
@@ -27,10 +35,6 @@ module RGData
       end
 
       def new_path(opts={})
-        list_path(opts)
-      end
-
-      def create_folder_path(opts={})
         list_path(opts)
       end
 
@@ -53,7 +57,10 @@ module RGData
       end
 
       # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#CreateFolders
-      def folder_metadata(title)
+      def folder_metadata(opts={})
+        title = opts[:title]
+        type = opts[:type]
+        id = opts[:id]
         template('documents_list/folder.xml', binding)
       end
     end

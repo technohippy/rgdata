@@ -20,10 +20,10 @@
       * (-) Uploading content with metadata
       * (v) Uploading content without metadata
       * (v) Uploading only metadata (no content)
-    * (v) Updating documents
-      * (v) Updating metadata
-      * (v) Updating content
-      * (v) Updating both metadata and content
+    * (-) Updating documents (TODO: fail to update spreadsheet)
+      * (-) Updating metadata
+      * (-) Updating content
+      * (-) Updating both metadata and content
     * (v) Creating a folder
     * (v) Trashing a document or folder
     * (-) Searching the documents feed

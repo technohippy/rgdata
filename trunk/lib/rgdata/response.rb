@@ -20,6 +20,14 @@ module RGData
       not success?
     end
 
+    def if_success(silent=nil, &block)
+      if success?
+        block.call(self)
+      else
+        raise_error! unless silent
+      end
+    end
+
     def raise_error!
       @http_response.error!
     end
