@@ -65,18 +65,16 @@ describe RGData::DocumentsList::Service do
 
   it 'should update metadata with hash' do
     list_response = @client.list
-    entry = list_response.body.entry.first
+    #entry = list_response.body.entry.first
+    entry = list_response.body.entry.find{|e| e.category.label == 'document'}
     response = entry.update!(:title => 'updated title')
-if response.error?
-  puts ">>>>#{response.message}"
-  puts ">>>>#{response.raw_body}"
-end
     response.code.should == 200
   end
 
   it 'should update metadata with equal method' do
     list_response = @client.list
-    entry = list_response.body.entry.first
+    #entry = list_response.body.entry.first
+    entry = list_response.body.entry.find{|e| e.category.label == 'document'}
     entry.title = 'updated title'
     response = entry.update!
     response.code.should == 200
@@ -84,7 +82,8 @@ end
 
   it 'should update content' do
     list_response = @client.list
-    entry = list_response.body.entry.first
+    #entry = list_response.body.entry.first
+    entry = list_response.body.entry.find{|e| e.category.label == 'document'}
     response = @client.update(entry, :content => "1,2,3\n4,5,6\n7,8,#{rand(10000)}", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
@@ -92,7 +91,8 @@ end
 
   it 'should update title and content' do
     list_response = @client.list
-    entry = list_response.body.entry.first
+    #entry = list_response.body.entry.first
+    entry = list_response.body.entry.find{|e| e.category.label == 'document'}
     response = @client.update(entry, :title => 'modify title and content', :content => "#{rand(10000)},2,3\n4,5,6\n7,8,9", :filepath => 'txt')
     response.code.should == 200
     response.body.author.name.should == 'RGData.Library'
