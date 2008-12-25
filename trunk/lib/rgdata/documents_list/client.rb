@@ -37,12 +37,10 @@ module RGData
           'Content-Length' => data.size.to_s,
           'Content-Type' => 'application/atom+xml'
         }
-puts ">>"
-puts link
-puts ">>"
-puts data
-puts ">>"
         post_request(link, data, header)
+      end
+
+      def move_out(entry)
       end
 
       def trash(entry, opts={})

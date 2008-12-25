@@ -17,14 +17,25 @@ describe RGData::DocumentsList::Service do
       folder_id = folder.id?
     end
     list_response = @client.list
-    entry = list_response.body.entry.first
-    response = @client.move(entry, folder_id)
-    response.if_success do
-      response.code.should == 201
+    list_response.if_success do
+      entry = list_response.body.entry.first
+      response = @client.move(entry, folder_id)
+      response.if_success do
+        response.code.should == 201
+      end
     end
   end
 
   it 'should move a document out of a folder' do
+    list_response = @client.retrieve :show_folders => true
+    list_response.if_success do
+      #entry = list_response.body.entry.find do |e|
+      #end
+      list_response.body.entry.each do |e| pp e unless e.category.label == 'folder' end
+      entry = list_response.body.entry.first
+
+      @client.move_out(entry)
+    end
   end
 
   it 'should retrieve documents' do

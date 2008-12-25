@@ -33,8 +33,8 @@
       * (v) Performing a text query
       * (v) Retrieving all documents and folders
     * (v) Retrieving a list of folder contents
-    * ( ) Moving documents and folders
-      * ( ) Moving into a folder
+    * (-) Moving documents and folders
+      * (-) Moving into a folder
       * ( ) Moving out of a folder
     * ( ) Modifying Document Sharing Permissions
       * ( ) Overview of Document Sharing (ACLs)
