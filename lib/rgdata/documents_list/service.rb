@@ -11,6 +11,7 @@ module RGData
         super SERVICE_NAME, SERVICE_URI
         @visibility = 'private'
         @projection = 'full'
+        @type = 'documents'
       end
 
       def client_class
@@ -22,7 +23,7 @@ module RGData
       end
 
       def list_path(opts={})
-        "/feeds/documents/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}"
+        "/feeds/#{opts[:type] || @type}/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}"
       end
 
       def new_path(opts={})
@@ -34,7 +35,7 @@ module RGData
       end
 
       def edit_path(category, eid, opts={})
-        "/feeds/documents/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}/#{category}%3A#{eid}"
+        "/feeds/#{opts[:type] || @type}/#{opts[:visibility] || @visibility}/#{opts[:projection] || @projection}/#{category}%3A#{eid}"
       end
 
       def edit_media_path(category, eid)
