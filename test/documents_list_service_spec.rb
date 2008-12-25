@@ -8,15 +8,19 @@ describe RGData::DocumentsList::Service do
   end
 
   it 'should move a document into a folder' do
-    list_response = @client.list
-    entry = list_response.body.entry.first
-    response = @client.move(entry, 'starred')
-puts "--"
-puts response.message
-puts response.raw_body
-puts "--"
+    response = @client.retrieve :show_folders => true
+    folder_id = nil
     response.if_success do
       response.code.should == 200
+      list = response.body
+      folder = list.entry.find{|e| e.category.label == 'folder'}
+      folder_id = folder.id?
+    end
+    list_response = @client.list
+    entry = list_response.body.entry.first
+    response = @client.move(entry, folder_id)
+    response.if_success do
+      response.code.should == 201
     end
   end
 
@@ -64,7 +68,6 @@ puts "--"
     response.if_success do
       response.code.should == 200
       list = response.body
-list.entry.each do |e| puts entry.category.label end
       list.entry.size.should > 0
     end
   end

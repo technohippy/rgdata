@@ -29,7 +29,7 @@ module RGData
     end
 
     def raise_error!
-      @http_response.error!
+      raise @http_response.error_type.new("#{@http_response.code} #{@http_response.message.dump}: #{raw_body}", self)
     end
 
     def message
