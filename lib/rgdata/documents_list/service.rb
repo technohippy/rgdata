@@ -50,6 +50,10 @@ module RGData
         edit_path(category, eid)
       end
 
+      def delete_in_folder_path(folder_id, document_id)
+        "/feeds/folders/private/full/folder%3A#{folder_id}/document%3A#{document_id}"
+      end
+
       # http://code.google.com/intl/en/apis/documents/docs/2.0/developers_guide_protocol.html#UploadingWMetadata
       # http://code.google.com/intl/ja/apis/documents/docs/2.0/developers_guide_protocol.html#UpdatingMetadata
       def metadata(title, etag=nil)
