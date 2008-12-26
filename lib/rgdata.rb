@@ -1,10 +1,11 @@
+$: << File.dirname(__FILE__)
 require 'pp'
 require 'net/http'
 require 'net/https'
 require 'rgdata/service'
 
 module RGData
-  VERSION = '1.0.0'
+  VERSION = '0.0.1'
 
   class NeedLoggedInError < StandardError; end
   class InvalidTokenError < StandardError; end
